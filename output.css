@@ -204,14 +204,40 @@ abbr:where([title]) {
 Remove the default font size and weight for headings.
 */
 
-h1,
-h2,
-h3,
-h4,
-h5,
+h1 {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+h2 {
+  display: block;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h3 {
+  display: block;
+  font-size: 1.17em;
+  font-weight: bold;
+}
+
+h4 {
+  display: block;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+h5 {
+  display: block;
+  font-size: .83em;
+  font-weight: bold;
+}
+
 h6 {
-  font-size: inherit;
-  font-weight: inherit;
+  display: block;
+  font-size: .67em;
+  font-weight: bold;
 }
 
 /*

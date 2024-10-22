@@ -204,40 +204,14 @@ abbr:where([title]) {
 Remove the default font size and weight for headings.
 */
 
-h1 {
-  display: block;
-  font-size: 2em;
-  font-weight: bold;
-}
-
-h2 {
-  display: block;
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-h3 {
-  display: block;
-  font-size: 1.17em;
-  font-weight: bold;
-}
-
-h4 {
-  display: block;
-  font-size: 1em;
-  font-weight: bold;
-}
-
-h5 {
-  display: block;
-  font-size: .83em;
-  font-weight: bold;
-}
-
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
-  display: block;
-  font-size: .67em;
-  font-weight: bold;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 /*
@@ -578,4 +552,78 @@ video {
 
 [hidden]:where(:not([hidden="until-found"])) {
   display: none;
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.w-24 {
+  width: 6rem;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.space-x-9 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(2.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(2.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.bg-slate-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.font-bold {
+  font-weight: 700;
 }

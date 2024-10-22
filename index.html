@@ -5,14 +5,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>92 Donar King</title>
-        <link rel="shortcut icon" href="./images/round_logo.png" type="image/x-icon">
-
+        <link rel="shortcut icon" href="./images/icon.png" type="image/x-icon">
+        <link rel="stylesheet" href="./styles/home.css">
+        
         <!-- tailwind css link -->
-        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-        <!-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> -->
         <link href="./output.css" rel="stylesheet">
-        <link rel="stylesheet" href="./heading_style.css">
-
+        <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.14/dist/tailwind.min.css" rel="stylesheet"> -->
         <!-- font - kanit -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +20,20 @@
     </head>
 
     <body>
-        <h1 class="">Hello world </h1>
+        <nav class="flex flex-row justify-between border-b border-black h-22">
+            <div class="logo_area inline-block">
+                <img src="./images/second_main_logo.png" alt="donor_king" class="nav_logo w-24">
+            </div>
+            <div class="nav_link my-auto space-x-9">
+                <a class="active text-lg" href="#">Home</a>
+                <a class=" text-lg" href="#">About us</a>
+                <a class=" text-lg" href="#">Contact us</a>
+            </div>
+            <div class="my-auto">
+                <button class="mx-2">Log in</button>
+                <button class="mx-2">Sign up</button>
+            </div>
+        </nav>
     </body>
 
 </html>

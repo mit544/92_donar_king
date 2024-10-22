@@ -1,0 +1,6 @@
+.active {
+    border-bottom: 3px #BD3E15 solid;
+    cursor: pointer;
+    border-radius: 14%;
+    border-bottom-width: 2px;
+}

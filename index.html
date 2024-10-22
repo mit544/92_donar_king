@@ -11,6 +11,7 @@
         <!-- tailwind css link -->
         <link href="./output.css" rel="stylesheet">
         <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.14/dist/tailwind.min.css" rel="stylesheet"> -->
+        
         <!-- font - kanit -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,18 +21,18 @@
     </head>
 
     <body>
-        <nav class="flex flex-row justify-between border-b border-black h-22">
+        <nav class="flex flex-row justify-between border-b border-black h-22 px-4">
             <div class="logo_area inline-block">
                 <img src="./images/second_main_logo.png" alt="donor_king" class="nav_logo w-24">
             </div>
-            <div class="nav_link my-auto space-x-9">
-                <a class="active text-lg" href="#">Home</a>
-                <a class=" text-lg" href="#">About us</a>
-                <a class=" text-lg" href="#">Contact us</a>
+            <div class="nav_link my-auto">
+                <a class="active px-3 mx-1 hover:bg-red-300 hover:text-white py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg" href="#">Home</a>
+                <a class=" px-3 mx-1 hover:bg-red-300 hover:text-white py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg" href="#">About us</a>
+                <a class=" px-3 mx-1 hover:bg-red-300 hover:text-white py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg" href="#">Contact us</a>
             </div>
             <div class="my-auto">
-                <button class="mx-2">Log in</button>
-                <button class="mx-2">Sign up</button>
+                <button class="mx-2 bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500">Log in</button>
+                <button class="mx-2 bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500">Sign up</button>
             </div>
         </nav>
     </body>

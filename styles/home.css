@@ -4,3 +4,11 @@
     border-radius: 14%;
     border-bottom-width: 2px;
 }
+
+.bg_color{
+    background-color: #F7F7F7;
+}
+
+.text{
+    color: #2563eb;
+}

@@ -20,28 +20,96 @@
             rel="stylesheet">
     </head>
 
+
     <body>
-        <nav class="flex flex-row justify-between border-b border-black h-22 px-4">
-            <div class="logo_area inline-block">
-                <img src="./images/second_main_logo.png" alt="donor_king" class="nav_logo w-24">
+        <header>
+            <nav class="flex justify-between h-24 px-4">
+                <div class="logo_area my-auto">
+                    <img src="./images/logo.png" alt="donor_king" class="nav_logo w-16 ">
+                </div>
+
+                <div class="nav_link mx-auto my-auto">
+                    <a class="active px-3 mx-1 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
+                        href="#">Home</a>
+                    <a class=" px-3 mx-1 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
+                        href="#">About us</a>
+                    <a class=" px-3 mx-1 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
+                        href="#">Contact us</a>
+                </div>
+
+                <div class="my-auto">
+                    <label for="language-select">Select Language:</label>
+                    <select name="language-select" class="select_lang w-24 border-2 mr-5" id="language-select">
+                        <option value="en" class="language_opt">English</option>
+                        <option value="fr" class="language_opt">Français (French)</option>
+                        <option value="es" class="language_opt">Español (Spanish)</option>
+                        <option value="de" class="language_opt">Deutsch (German)</option>
+                        <option value="it" class="language_opt">Italiano (Italian)</option>
+                        <option value="pt" class="language_opt">Português (Portuguese)</option>
+                        <option value="ru" class="language_opt">Русский (Russian)</option>
+                        <option value="zh" class="language_opt">中文 (Chinese)</option>
+                        <option value="ja" class="language_opt">日本語 (Japanese)</option>
+                        <option value="ar" class="language_opt">العربية (Arabic)</option>
+                        <option value="hi" class="language_opt">हिन्दी (Hindi)</option>
+                        <option value="ko" class="language_opt">한국어 (Korean)</option>
+                        <option value="tr" class="language_opt">Türkçe (Turkish)</option>
+                        <option value="nl" class="language_opt">Nederlands (Dutch)</option>
+                        <option value="sv" class="language_opt">Svenska (Swedish)</option>
+                        <option value="no" class="language_opt">Norsk (Norwegian)</option>
+                        <option value="da" class="language_opt">Dansk (Danish)</option>
+                        <option value="fi" class="language_opt">Suomi (Finnish)</option>
+                        <option value="pl" class="language_opt">Polski (Polish)</option>
+                        <option value="th" class="language_opt">ไทย (Thai)</option>
+                        <option value="he" class="language_opt">עברית (Hebrew)</option>
+                        <option value="vi" class="language_opt">Tiếng Việt (Vietnamese)</option>
+                    </select>
+
+                    <button
+                        class="mx-2 bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500">Log
+                        in
+                    </button>
+                    <button
+                        class="mx-2 bg-red-400  text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500">Sign
+                        up
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <div class=" mt-8 first_ele flex flex-row justify-around flex-wrap">
+
+            <div class="w-2/6">
+                <h1 class=" mr-2 text_shadow text-5xl text-left">Where Every Bite Rules!
+                    Experience the Ultimate Döner Delights at 92
+                    Döner King!</h1>
+                <div class="mt-14">
+                    <button
+                        class=" bg-red-400 text-white font-bold px-4 py-4 rounded-xl shadow-2xl hover:shadow transition-shadow delay-75 hover:bg-red-500">Book
+                        a Table
+                    </button>
+                    <button
+                        class="mx-6 bg-red-400 text-white font-bold px-4 py-4 rounded-xl shadow-2xl hover:shadow transition-shadow delay-75 hover:bg-red-500">Sign
+                        in
+                    </button>
+                </div>
             </div>
-            <div class="nav_link my-auto">
-                <a class="active px-3 mx-1 hover:bg-red-300 hover:text-white py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
+            <p class=" mt-6 font-bold text-white bg-red-400 py-5 px-8 rounded-full w-28 h-28">
+                20% <br> Discount <br> on 2
+            </p>
+        </div>
+
+        <footer class="border-red border-2 ">
+            <div class="flex flex-col flex-wrap justify-center align-center">
+                <a class="active px-3 mx-1 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
                     href="#">Home</a>
-                <a class=" px-3 mx-1 hover:bg-red-300 hover:text-white py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
+                <a class=" px-3 mx-1 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
                     href="#">About us</a>
-                <a class=" px-3 mx-1 hover:bg-red-300 hover:text-white py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
+                <a class=" px-3 mx-1 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
                     href="#">Contact us</a>
             </div>
-            <div class="my-auto">
-                <button
-                    class="mx-2 bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500">Log in
-                </button>
-                <button
-                    class="mx-2 bg-red-400  text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500">Sign up
-                </button>
-            </div>
-        </nav>
+        </footer>
+
+
     </body>
 
 </html>

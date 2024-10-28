@@ -8,16 +8,19 @@
 }
 
 .first_ele {
-    height: 80vh;
-    width: 100vw;
+    width: 2em;
+    /* height: 80vh; */
     /* border: 1px red solid; */
     background-attachment: scroll;
     background-image: url(../images/first_element.jpg);
     /* background-attachment: fixed; */
-    background-position: 142% 76%;
-    background-size: 62em;
+    background-position: 8% 92%;
+    background-size: 50em;
     background-repeat: no-repeat;
+    width: 30em;
+    height: 30em;
 }
+
 
 /* heading styles */
 h1 {
@@ -51,8 +54,235 @@ h6 {
     color: #FF5620;
 }
 
-text_shadow{ 
+text_shadow {
 
     text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 
+}
+
+/* footer insta button */
+.icon-button {
+    background: linear-gradient(225deg, #70dbf2 0%, #fc00ff 100%);
+    border: none;
+    border-radius: 50%;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.icon-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.icon {
+    width: 100%;
+    height: 100%;
+}
+
+.button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.button svg {
+    fill: #fe8282;
+    position: relative;
+    z-index: 10;
+    transition: fill 0.5s ease;
+}
+
+.button .bg-effect {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at top left, #FA8F21, #D82D7E, #8C3AAA);
+    transition: all 0.5s ease;
+    z-index: 0;
+}
+
+.button:hover svg {
+    fill: white;
+}
+
+.button:hover .bg-effect {
+    top: 0;
+}
+
+/* footer facebook btn */
+.button_fb {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button_fb svg {
+    position: relative;
+    z-index: 1;
+    fill: #fe8282;
+    /* Dark gray */
+    transition: fill 0.3s ease;
+}
+
+/* Background Effect */
+.button_fb .bg-effect {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #3b82f6;
+    /* Blue */
+    border-radius: 50%;
+    transition: all 0.5s ease;
+    z-index: 0;
+}
+
+/* Hover Effect */
+.button_fb:hover .bg-effect {
+    top: 0;
+}
+
+.button_fb:hover svg {
+    fill: white;
+}
+
+/* TikTok Button Styling */
+.tik_tok .button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* WhatsApp Button Styling */
+.button_whatsapp {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Icon inside the WhatsApp Button */
+.button_whatsapp svg {
+    position: relative;
+    z-index: 1;
+    fill: #fe8282;
+    /* Dark gray color */
+    transition: fill 0.3s ease;
+}
+
+/* Green Background Effect */
+.button_whatsapp .bg_effect_whatsapp_button {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #34d399;
+    /* Green color */
+    transition: all 0.5s ease;
+    z-index: 0;
+}
+
+/* Hover Effect for WhatsApp Button */
+.button_whatsapp:hover .bg_effect_whatsapp_button {
+    top: 0;
+}
+
+.button_whatsapp:hover svg {
+    fill: white;
+}
+
+
+/* popup menu */
+/* Modal Overlay */
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    inset: 0; /* shorthand for top: 0; right: 0; bottom: 0; left: 0 */
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto; /* Allow scroll within the overlay */
+}
+
+/* Modal Container */
+.modal-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.modal-container.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }

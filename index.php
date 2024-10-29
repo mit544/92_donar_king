@@ -1,5 +1,44 @@
+<?php
+session_start();
+
+// Language selection logic
+$available_languages = ['en', 'fr', 'es'];
+$default_language = 'en';
+
+if (isset($_GET['lang']) && in_array($_GET['lang'], $available_languages)) {
+    $lang = $_GET['lang'];
+    $_SESSION['lang'] = $lang;
+    setcookie('lang', $lang, time() + (3600 * 24 * 30), '/');
+} elseif (isset($_SESSION['lang']) && in_array($_SESSION['lang'], $available_languages)) {
+    $lang = $_SESSION['lang'];
+} elseif (isset($_COOKIE['lang']) && in_array($_COOKIE['lang'], $available_languages)) {
+    $lang = $_COOKIE['lang'];
+} else {
+    $lang = $default_language;
+}
+
+// Define language file path
+$lang_file = "./lang/lang.{$lang}.php";
+
+// Check if language file exists, if not fall back to default
+if (!file_exists($lang_file)) {
+    $lang = $default_language;
+    $lang_file = "./lang/lang.{$lang}.php";
+}
+
+// Include language file
+include_once $lang_file;
+
+// Check if $lang array is set and is an array
+if (!isset($lang) || !is_array($lang)) {
+    die('Language file is missing or incorrect.');
+}
+
+?>
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
     <head>
         <meta charset="UTF-8">
@@ -32,47 +71,31 @@
 
                 <div class="nav_link mx-auto my-auto">
                     <a class="active px-3 mx-1 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
-                        href="#">Home</a>
+                        href="index.php"><?php echo $lang['MENU_HOME'] ?></a>
                     <a class=" px-3 mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
-                        href="#">About us</a>
+                        href="about_us.php"><?php echo $lang['MENU_ABOUT_US'] ?></a>
                     <a class=" px-3 mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
-                        href="#">Contact us</a>
+                        href="contact_us.php"><?php echo $lang['MENU_CONTACT_US'] ?></a>
                 </div>
 
                 <div class="my-auto">
                     <label for="language-select">Select Language:</label>
                     <select name="language-select" class="select_lang w-24 border-2 mr-5" id="language-select">
-                        <option value="en" class="language_opt">English</option>
-                        <option value="fr" class="language_opt">Français (French)</option>
-                        <option value="es" class="language_opt">Español (Spanish)</option>
-                        <option value="de" class="language_opt">Deutsch (German)</option>
-                        <option value="it" class="language_opt">Italiano (Italian)</option>
-                        <option value="pt" class="language_opt">Português (Portuguese)</option>
-                        <option value="ru" class="language_opt">Русский (Russian)</option>
-                        <option value="zh" class="language_opt">中文 (Chinese)</option>
-                        <option value="ja" class="language_opt">日本語 (Japanese)</option>
-                        <option value="ar" class="language_opt">العربية (Arabic)</option>
-                        <option value="hi" class="language_opt">हिन्दी (Hindi)</option>
-                        <option value="ko" class="language_opt">한국어 (Korean)</option>
-                        <option value="tr" class="language_opt">Türkçe (Turkish)</option>
-                        <option value="nl" class="language_opt">Nederlands (Dutch)</option>
-                        <option value="sv" class="language_opt">Svenska (Swedish)</option>
-                        <option value="no" class="language_opt">Norsk (Norwegian)</option>
-                        <option value="da" class="language_opt">Dansk (Danish)</option>
-                        <option value="fi" class="language_opt">Suomi (Finnish)</option>
-                        <option value="pl" class="language_opt">Polski (Polish)</option>
-                        <option value="th" class="language_opt">ไทย (Thai)</option>
-                        <option value="he" class="language_opt">עברית (Hebrew)</option>
-                        <option value="vi" class="language_opt">Tiếng Việt (Vietnamese)</option>
+                        <option value="op" class="language_opt">select
+                        </option>
+                        <option value="en" class="language_opt" <?php echo $lang == 'en' ? 'selected' : ''; ?>>English
+                        </option>
+                        <option value="fr" class="language_opt" <?php echo $lang == 'fr' ? 'selected' : ''; ?>>Français
+                            (French)</option>
+                        <option value="es" class="language_opt" <?php echo $lang == 'es' ? 'selected' : ''; ?>>Español
+                            (Spanish)</option>
                     </select>
 
                     <button
-                        class="mx-2 bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500">Log
-                        in
+                        class="mx-2 bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500"><?php echo $lang['Log_in_button'] ?>
                     </button>
                     <button
-                        class="mx-2 bg-red-400  text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500">Sign
-                        up
+                        class="mx-2 bg-red-400  text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500"><?php echo $lang['Sign_up_button'] ?>
                     </button>
                 </div>
             </nav>
@@ -81,43 +104,41 @@
         <div class=" mt-8 mb-8 flex flex-row justify-center h- flex-wrap ">
 
             <div class="w-2/6">
-                <h1 class=" mr-2 text_shadow text-5xl text-left">Where Every Bite Rules!
-                    Experience the Ultimate Döner Delights at 92
-                    Döner King!</h1>
+                <h1 class=" mr-2 text_shadow text-5xl text-left"><?php echo $lang['PAGE_TITLE'] ?? 'Welcome'; ?></h1>
                 <div class="mt-14">
                     <button
-                        class=" bg-red-400 text-white font-bold px-4 py-4 rounded-xl shadow-2xl hover:shadow transition-shadow delay-75 hover:bg-red-500">Book
-                        a Table
+                        class=" bg-red-400 text-white font-bold px-4 py-4 rounded-xl shadow-2xl hover:shadow transition-shadow delay-75 hover:bg-red-500"><?php echo $lang['book_button'] ?? 'Book a Table'; ?>
                     </button>
                     <button
-                        class="mx-6 bg-red-400 text-white font-bold px-4 py-4 rounded-xl shadow-2xl hover:shadow transition-shadow delay-75 hover:bg-red-500">Sign
-                        in
+                        class="mx-6 bg-red-400 text-white font-bold px-4 py-4 rounded-xl shadow-2xl hover:shadow transition-shadow delay-75 hover:bg-red-500"><?php echo $lang['Sign_in_button'] ?? 'Sign in'; ?>
                     </button>
                 </div>
             </div>
             <div class="first_ele">
                 <p class=" mt-6 font-bold text-sm text-white bg-red-400 py-4 px-6 rounded-full w-24 h-24">
-                    20% <br> Discount <br> on 2
-                </p>
+                    <?php echo $lang['discount'] ?? '20% Discount on 2'; ?>
             </div>
         </div>
 
         <div class="flex flex-warp flex-row justify-center">
             <!-- First Card - Signature Dishes Spotlight -->
             <div class="group bg-white shadow-lg rounded-xl p-2.5 w-96 ml-4">
-                <img src="./images/attract_dishes.jpg" alt="image"
-                    class="rounded-xl w-full h-auto">
+                <img src="./images/attract_dishes.jpg" alt="image" class="rounded-xl w-full h-auto">
                 <div class="flex flex-col items-center justify-center py-6 gap-4 text-center">
-                    <h4 class="font-bold text-xl text-red-400">Signature Dishes Spotlight</h4>
+                    <h4 class="font-bold text-xl text-red-400">
+                        <?php echo $lang['signature'] ?? 'Signature Dishes Spotlight'; ?>
+                    </h4>
                     <button type="button"
                         class="btn btn-primary open-modal mx-2 bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500"
-                        data-modal="modal1">See More</button>
+                        data-modal="modal1"><?php echo $lang['see_more'] ?? 'See More'; ?></button>
 
                     <!-- Modal 1 -->
                     <div class="modal-overlay hidden" data-modal="modal1">
                         <div class="modal-container">
                             <div class="flex justify-between items-center pb-4 border-b">
-                                <h4 class="text-sm font-medium">Signature Dishes Spotlight</h4>
+                                <h4 class="text-sm font-medium">
+                                    <?php echo $lang['signature'] ?? 'Signature Dishes Spotlight'; ?>
+                                </h4>
                                 <button class="close-modal" data-modal="modal1">
                                     <svg width="24" height="24" viewBox="0 0 24 24">
                                         <path d="M7.75732 7.75739L16.2426 16.2427M16.2426 7.75739L7.75732 16.2427"
@@ -125,17 +146,13 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="py-4 text-black">At 92 Doner King, we’re known for our flavor-packed, juicy doners
-                                and authentic Turkish dishes. Our Signature Dishes Spotlight highlights crowd favorites
-                                like our Classic Lamb Doner, Chicken Shawarma Wrap, and 92 King Kebab Platter—each
-                                crafted with traditional spices and the freshest ingredients. Every bite is a taste of
-                                tradition and quality. Check out this section for photos and chef-curated notes on why
-                                these dishes are must-tries. Let our top dishes guide you to the ultimate 92 Doner King
-                                experience!</p>
+                            <p class="py-4 text-black">
+                                <?php echo $lang['signature_desc'] ?? 'At 92 Doner King, we’re known for our flavor-packed, juicy doners and authentic Turkish dishes. Our Signature Dishes Spotlight highlights crowd favorites like our Classic Lamb Doner, Chicken Shawarma Wrap, and 92 King Kebab Platter—each crafted with traditional spices and the freshest ingredients. Every bite is a taste of tradition and quality. Check out this section for photos and chef-curated notes on why these dishes are must-tries. Let our top dishes guide you to the ultimate 92 Doner King experience!'; ?>
+                            </p>
                             <div class="flex items-center justify-end pt-4 border-t space-x-4">
                                 <button type="button"
                                     class="btn btn-primary close-modal bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500"
-                                    data-modal="modal1">Okay, got it</button>
+                                    data-modal="modal1"><?php echo $lang['signature_ok'] ?? 'Okay, got it'; ?></button>
                             </div>
                         </div>
                     </div>
@@ -144,13 +161,14 @@
 
             <!-- Second Card - Hygiene and Safety Assurance -->
             <div class="group bg-white shadow-lg rounded-xl p-2.5 w-96 ml-4">
-                <img src="./images/cleaning.png" alt="image"
-                    class="rounded-xl w-full h-auto">
+                <img src="./images/cleaning.png" alt="image" class="rounded-xl w-full h-auto">
                 <div class="flex flex-col items-center justify-center py-6 gap-4 text-center">
-                    <h4 class="font-bold text-xl text-red-400">Hygiene and Safety Assurance</h4>
+                    <h4 class="font-bold text-xl text-red-400">
+                        <?php echo $lang['hygiene'] ?? 'Hygiene and Safety Assurance'; ?>
+                    </h4>
                     <button type="button"
                         class="btn btn-primary open-modal mx-2 bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500"
-                        data-modal="modal2">See More</button>
+                        data-modal="modal2"><?php echo $lang['see_more'] ?? 'See More'; ?></button>
 
                     <!-- Modal 2 -->
                     <div class="modal-overlay hidden" data-modal="modal2">
@@ -164,16 +182,13 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="py-4 text-black">At 92 Doner King, your safety is our priority. In our Hygiene and
-                                Safety Assurance section, learn about our rigorous kitchen cleanliness protocols, from
-                                daily sanitation practices to staff training in hygiene and food safety standards. We
-                                follow strict food handling guidelines and are committed to providing freshly prepared
-                                meals in a clean, safe environment. Look for our Certified Clean badge, which reflects
-                                our dedication to quality and safety in every meal we serve.</p>
+                            <p class="py-4 text-black">
+                                <?php echo $lang['hygiene_desc'] ?? 'At 92 Doner King, your safety is our priority. In our Hygiene and Safety Assurance section, learn about our rigorous kitchen cleanliness protocols, from daily sanitation practices to staff training in hygiene and food safety standards. We follow strict food handling guidelines and are committed to providing freshly prepared meals in a clean, safe environment. Look for our Certified Clean badge, which reflects our dedication to quality and safety in every meal we serve.'; ?>
+                            </p>
                             <div class="flex items-center justify-end pt-4 border-t space-x-4">
                                 <button type="button"
                                     class="btn btn-primary close-modal bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500"
-                                    data-modal="modal2">Okay, got it</button>
+                                    data-modal="modal2"><?php echo $lang['hygiene_ok'] ?? 'Okay, got it'; ?></button>
                             </div>
                         </div>
                     </div>
@@ -181,13 +196,13 @@
             </div>
 
             <div class="group bg-white shadow-lg rounded-xl p-2.5 w-96 ml-4">
-                <img src="./images/int_manu.jpg" alt="image"
-                    class="rounded-xl w-full h-auto">
+                <img src="./images/int_manu.jpg" alt="image" class="rounded-xl w-full h-auto">
                 <div class="flex flex-col items-center justify-center py-6 gap-4 text-center">
-                    <h4 class="font-bold text-xl text-red-400">Interactive Menu</h4>
+                    <h4 class="font-bold text-xl text-red-400"><?php echo $lang['interactive'] ?? 'Interactive Menu'; ?>
+                    </h4>
                     <button type="button"
                         class="btn btn-primary open-modal mx-2 bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500"
-                        data-modal="modal3">See More</button>
+                        data-modal="modal3"><?php echo $lang['see_more'] ?? 'See More'; ?></button>
 
                     <!-- Modal 3 -->
                     <div class="modal-overlay hidden" data-modal="modal3">
@@ -201,16 +216,16 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="py-4 text-black">With our Interactive Menu, creating your perfect doner has never
+                            <p class="py-4 text-black"><?php echo $lang['interactive_desc'] ?? 'With our Interactive Menu, creating your perfect doner has never
                                 been easier! Choose your meat—lamb, chicken, or mixed doner—then customize it with your
                                 choice of fresh veggies, sauces, and toppings. Want extra spice or a gluten-free wrap?
                                 Just click! Our dynamic menu allows you to tailor each item to your taste, with live
                                 previews and pricing updates. To round out your meal, explore suggested sides and drinks
-                                for a complete doner experience.</p>
+                                for a complete doner experience.'; ?></p>
                             <div class="flex items-center justify-end pt-4 border-t space-x-4">
                                 <button type="button"
                                     class="btn btn-primary close-modal bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500"
-                                    data-modal="modal3">Okay, got it</button>
+                                    data-modal="modal3"><?php echo $lang['hygiene_ok'] ?? 'Okay, got it'; ?></button>
                             </div>
                         </div>
                     </div>
@@ -218,6 +233,7 @@
             </div>
 
         </div>
+        <!-- script for popups -->
         <script>
             // Function to open a modal
             function openModal(modalId) {
@@ -268,15 +284,15 @@
         <footer class=" pt-16 flex flex-col justify-center align-center">
             <div class="flex flex-row flex-wrap justify-center align-center">
                 <a class="active px-3 mx-1 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
-                    href="#">Home</a>
-                <a class=" px-3 mx-1 font-black-100 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
-                    href="#">About us</a>
-                <a class=" px-3 mx-1 font-black-100 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
-                    href="#">Contact us</a>
+                    href="index.php"><?php echo $lang['MENU_HOME'] ?></a>
+                <a class="px-3 mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
+                    href="about_us.php"><?php echo $lang['MENU_ABOUT_US'] ?></a>
+                <a class=" px-3 mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
+                    href="contact_us.php"><?php echo $lang['MENU_CONTACT_US'] ?></a>
             </div>
             <div class="my-4">
-                <h3 class="text-center font-bold text-xl">92 Doner King</h3>
-                <p class="mt-2 text-center font-light text-black-100">Every bite matters</p>
+                <h3 class="text-center font-bold text-xl"><?php echo $lang['footer_heading'] ?></h3>
+                <p class="mt-2 text-center font-light text-black-100"><?php echo $lang['footer_subheading'] ?></p>
             </div>
 
             <div class="flex flex-row justify-center">
@@ -312,8 +328,7 @@
             </div>
 
             <div class="mb-3">
-                <p class="text-center font-light text-black-100 ">Copyright &copy; 2024 | 92DonerKing All rights
-                    reserved
+                <p class="text-center font-light text-black-100 "><?php echo $lang['footer_copyright'] ?>
                 </p>
             </div>
 
@@ -321,6 +336,12 @@
         </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/pagedone@1.2.2/src/js/pagedone.js"></script>
+        <script>
+            document.getElementById('language-select').addEventListener('change', function () {
+                var selectedLang = this.value;
+                window.location.href = window.location.pathname + '?lang=' + selectedLang;
+            });
+        </script>
     </body>
 
 </html>

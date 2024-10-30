@@ -49,5 +49,21 @@ $lang['footer_heading'] = '92 Doner King';
 $lang['footer_subheading'] = 'Every bites matters';
 $lang['footer_copyright'] = 'Copyright &copy; 2024 | 92DonerKing All rights reserved';
 
+// sign up
+$lang['signup_head'] = 'Enter your details to register';
+$lang['signup_fname'] = 'First Name';
+$lang['signup_lname'] = 'Last Name';
+$lang['Email_id'] = 'Email address';
+$lang['password'] = 'Password';
+$lang['password_show'] = 'Show';
+$lang['Sign_in'] = 'Sign in';
+$lang['already_member'] = 'Already a member?';
+$lang['Cancel'] = 'Cancel';
 
+
+// sign in
+$lang['signin_head'] = 'Sign in to your account';
+$lang['notamember'] = 'Not a member?';
+$lang['Sign_in'] = 'Sign in';
+$lang['regyourself'] = 'Register yourself';
 ?>

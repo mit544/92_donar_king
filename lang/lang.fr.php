@@ -40,4 +40,21 @@ $lang['footer_heading'] = '92 Doner King';
 $lang['footer_subheading'] = 'Chaque bouchée compte';
 $lang['footer_copyright'] = 'Copyright &copy; 2024 | 92DonerKing Tous droits réservés';
 
+// Inscription
+$lang['signup_head'] = 'Entrez vos informations pour vous inscrire';
+$lang['signup_fname'] = 'Prénom';
+$lang['signup_lname'] = 'Nom';
+$lang['Email_id'] = 'Adresse e-mail';
+$lang['password'] = 'Mot de passe';
+$lang['password_show'] = 'Afficher';
+$lang['Sign_in'] = 'Se connecter';
+$lang['already_member'] = 'Déjà membre?';
+$lang['Cancel'] = 'Annuler';
+
+// Connexion
+$lang['signin_head'] = 'Connectez-vous à votre compte';
+$lang['notamember'] = 'Pas encore membre?';
+$lang['Sign_in'] = 'Se connecter';
+$lang['regyourself'] = 'Inscrivez-vous';
+
 ?>

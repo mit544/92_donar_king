@@ -40,4 +40,21 @@ $lang['footer_heading'] = '92 Doner King';
 $lang['footer_subheading'] = 'Cada bocado importa';
 $lang['footer_copyright'] = 'Copyright &copy; 2024 | 92DonerKing Todos los derechos reservados';
 
+// Registro
+$lang['signup_head'] = 'Ingrese sus datos para registrarse';
+$lang['signup_fname'] = 'Nombre';
+$lang['signup_lname'] = 'Apellido';
+$lang['Email_id'] = 'Correo electrónico';
+$lang['password'] = 'Contraseña';
+$lang['password_show'] = 'Mostrar';
+$lang['Sign_in'] = 'Iniciar sesión';
+$lang['already_member'] = '¿Ya eres miembro?';
+$lang['Cancel'] = 'Cancelar';
+
+// Iniciar sesión
+$lang['signin_head'] = 'Inicia sesión en tu cuenta';
+$lang['notamember'] = '¿No eres miembro?';
+$lang['Sign_in'] = 'Iniciar sesión';
+$lang['regyourself'] = 'Regístrate';
+
 ?>

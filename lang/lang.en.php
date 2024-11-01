@@ -114,5 +114,29 @@ $lang['avls'] = 'Available Stock';
 $lang['qnt'] = 'Quantity';
 $lang['lu'] = 'Last Updated';
 
+// manager
+$lang['manager'] = 'Manager';
+$lang['cso'] = 'Current Stock Overview';
+$lang['TIis'] = 'Total Items in Stock';
+$lang['tsv'] = 'Total Stock Value';
+$lang['tsa'] = 'Low Stock Alerts';
+$lang['ru'] = 'Recently Updated';
+$lang['ai'] = 'Add items';
+$lang['Add New Item'] = 'Add New Item';
+$lang['in'] = 'Item Name';
+$lang['q'] = 'Quantity';
+$lang['u'] = 'Upload';
+$lang['can'] = 'Cancel';
+$lang['img'] = 'Image';
+$lang['name'] = 'Name';
+$lang['q'] = 'Quantity';
+$lang['upd'] = 'Updated';
+$lang['act'] = 'Actions';
+$lang['delet'] = 'Delete Item';
+$lang['comfirm'] = 'Are you sure you want to delete this item?';
+$lang['messages'] = 'Message';
+$lang['notes'] = 'Notes';
+
+
 
 ?>

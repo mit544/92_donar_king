@@ -52,7 +52,7 @@ $user = $_SESSION['user'];
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ceo Dashboard</title>
+        <title>Order pad</title>
         <link rel="shortcut icon" href="./images/icon.png" type="image/x-icon">
         <link rel="stylesheet" href="./styles/home.css">
 
@@ -74,31 +74,6 @@ $user = $_SESSION['user'];
     </head>
 
     <body class="bg-white">
-        <script>
-            const ctx = document.getElementById('revenueChart').getContext('2d');
-            const revenueChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: <?= $labels ?>,
-                    datasets: [{
-                        label: 'Revenue',
-                        data: <?= $dataPoints ?>,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <header class="bg-white shadow-md">
             <nav class="container mx-auto py-3">
                 <div class="flex flex-wrap items-center justify-between">
@@ -173,7 +148,7 @@ $user = $_SESSION['user'];
                         <?php echo ($user['name']); ?>!
                     </h1>
                     <p class="text-xl text-gray-400">
-                        You are logged in as a CEO!!
+                        You are logged for the frontdesk!!
                     </p>
 
                     <button type="button"
@@ -307,77 +282,49 @@ $user = $_SESSION['user'];
             </div>
         </section>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6 px-4" id="dashboard">
-            <!-- Company Overview -->
-            <div class="col-span-1 lg:col-span-3 bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-                <h1 class="text-3xl font-bold text-blue-600">Company Overview</h1>
-                <p class="text-gray-500">High-level insights into company performance</p>
-            </div>
 
-            <!-- Key Performance Indicators (KPIs) -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-1 bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-bold text-green-500">Total Revenue</h2>
-                <p class="text-gray-700 text-xl">$10,000,000</p>
+      
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form - 92 Donor King</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-center text-red-500 mb-6">Place Your Order</h1>
+        <form action="./php_scripts/insert_customer_order.php" method="POST">
+            <div class="mb-4">
+                <label for="customer_name" class="block text-sm font-medium text-gray-700">Customer Name</label>
+                <input type="text" id="customer_name" name="customer_name" required
+                       class="mt-1 p-2 border rounded w-full">
             </div>
-            <div class="col-span-1 md:col-span-2 lg:col-span-1 bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-bold text-blue-500">Net Profit</h2>
-                <p class="text-gray-700 text-xl">$2,000,000</p>
+            <div class="mb-4">
+                <label for="customer_email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="customer_email" name="customer_email" required
+                       class="mt-1 p-2 border rounded w-full">
             </div>
-            <div class="col-span-1 md:col-span-2 lg:col-span-1 bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-bold text-yellow-500">Cash Flow</h2>
-                <p class="text-gray-700 text-xl">$1,500,000</p>
+            <div class="mb-4">
+                <label for="customer_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input type="tel" id="customer_number" name="customer_number" required
+                       class="mt-1 p-2 border rounded w-full">
             </div>
-
-            <!-- Financial Performance Chart -->
-            <div class="col-span-1 md:col-span-2 bg-gray-50 p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-bold text-blue-600">Revenue Trend</h2>
-                <canvas id="revenueChart"></canvas> <!-- Placeholder for chart -->
+            <div class="mb-4">
+                <label for="customer_order" class="block text-sm font-medium text-gray-700">Order Items</label>
+                <textarea id="customer_order" name="customer_order" required
+                          class="mt-1 p-2 border rounded w-full" rows="4" placeholder="e.g., Pizza, 2; Burger, 1"></textarea>
             </div>
-
-            <!-- Additional Metrics Here... -->
-        </div>
-
-        <script>
-            const ctx = document.getElementById('revenueChart').getContext('2d');
-            const revenueChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    datasets: [{
-                        label: 'Monthly Revenue',
-                        data: [1200000, 1150000, 1300000, 1250000, 1400000, 1350000, 1450000, 1400000, 1500000, 1550000, 1600000, 1650000],
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    return `$${context.raw.toLocaleString()}`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function (value) {
-                                    return `$${value.toLocaleString()}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        </script>
+            <div class="flex justify-end">
+                <button type="submit" class="bg-red-300 hover:bg-red-500 text-white font-normal py-2 px-4 rounded">
+                    Place Order
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
 
 
         <footer class="pt-8 pb-6 flex flex-col items-center">

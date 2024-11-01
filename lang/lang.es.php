@@ -101,4 +101,28 @@ $lang['uquantity'] = 'Actualizar Cantidad';
 $lang['avls'] = 'Stock Disponible';
 $lang['qnt'] = 'Cantidad';
 $lang['lu'] = 'Última Actualización';
+
+// manager 
+$lang['manager_es'] = 'Gerente';
+$lang['manager'] = 'Gerente';
+$lang['cso'] = 'Visión General del Stock Actual';
+$lang['TIis'] = 'Total de Artículos en Stock';
+$lang['tsv'] = 'Valor Total del Stock';
+$lang['tsa'] = 'Alertas de Bajo Stock';
+$lang['ru'] = 'Actualizaciones Recientes';
+$lang['ai'] = 'Agregar artículos';
+$lang['Add New Item'] = 'Agregar Nuevo Artículo';
+$lang['in'] = 'Nombre del Artículo';
+$lang['q'] = 'Cantidad';
+$lang['u'] = 'Subir';
+$lang['can'] = 'Cancelar';
+$lang['img'] = 'Imagen';
+$lang['name'] = 'Nombre';
+$lang['upd'] = 'Actualizado';
+$lang['act'] = 'Acciones';
+$lang['delet'] = 'Eliminar Artículo';
+$lang['comfirm'] = '¿Está seguro de que desea eliminar este artículo?';
+$lang['messages'] = 'Mensaje'; 
+$lang['notes'] = 'Notas'; 
+
 ?>

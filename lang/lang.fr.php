@@ -100,4 +100,28 @@ $lang['uquantity'] = 'Mettre à Jour la Quantité';
 $lang['avls'] = 'Stock Disponible';
 $lang['qnt'] = 'Quantité';
 $lang['lu'] = 'Dernière Mise à Jour';
+
+// manager
+$lang['manager_fr'] = 'Gérant';
+$lang['manager'] = 'Gestionnaire';
+$lang['cso'] = "Aperçu du Stock Actuel";
+$lang['TIis'] = "Total des Articles en Stock";
+$lang['tsv'] = "Valeur Totale du Stock";
+$lang['tsa'] = "Alertes de Faible Stock";
+$lang['ru'] = "Mises à Jour Récentes";
+$lang['ai'] = "Ajouter des articles";
+$lang['Add New Item'] = "Ajouter un Nouvel Article";
+$lang['in'] = "Nom de l'Article";
+$lang['q'] = "Quantité";
+$lang['u'] = "Télécharger";
+$lang['can'] = "Annuler";
+$lang['img'] = "Image";
+$lang['name'] = "Nom";
+$lang['upd'] = "Mis à Jour";
+$lang['act'] = "Actions";
+$lang['delet'] = "Supprimer l'Article";
+$lang['comfirm'] = "Êtes-vous sûr de vouloir supprimer cet article ?";
+$lang['messages'] = 'Message'; 
+$lang['notes'] = 'Notes'; 
+$lang['front_desk'] = 'You are logged for the frontdesk!!'; 
 ?>

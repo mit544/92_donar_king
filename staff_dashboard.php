@@ -486,7 +486,7 @@ $user = $_SESSION['user'];
             }
             function NotUpdated() {
                 Toastify({
-                    text: "The item hasn't updated",
+                    text: "The item hasnt updated",
                     duration: 3000,
                     gravity: "top",
                     position: "left",
@@ -500,7 +500,7 @@ $user = $_SESSION['user'];
                 if (urlParams.has('stock') && urlParams.get('stock') === 'updated') {
                     Updated();
                 }
-                elseif (urlParams.has('stock') && urlParams.get('stock') === 'negative') {
+                else{
                     NotUpdated()
                 }
             };

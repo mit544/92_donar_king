@@ -36,9 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($position === 'staff') {
                     header("Location: ../staff_dashboard.php?login=success");
                 } elseif ($position === 'manager') {
-                    header("Location: ./manager_dashboard.php");
+                    header("Location: ../manager_dashboard.php");
                 } elseif ($position === 'ceo') {
-                    header("Location: ./ceo_dashboard.php");
+                    header("Location: ../ceo_dashboard.php");
+                } elseif ($position === 'front') {
+                    header("Location: ../front_desk.php");
                 } else {
                     header("Location: ../default_dashboard.php");
                 }

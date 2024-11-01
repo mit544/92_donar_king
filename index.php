@@ -783,24 +783,24 @@ unset($_SESSION['errors'], $_SESSION['show_popup'], $_SESSION['show_loginpopup']
                 backgroundColor: "#ff0303",
             }).showToast();
         <?php endforeach; ?>
-        openSignInPopUp(); // Function to open the login popup
+        openSignInPopUp(); 
     </script>
 <?php endif; ?>
 <script>
-    // Function to display Toastify notifications for each error
+    
     function showToast(message) {
         Toastify({
             text: message,
             duration: 3000,
             gravity: "top",
-            position: "right",
-            backgroundColor: "#e74c3c", // Red background for errors
+            position: "left",
+            backgroundColor: "#e74c3c", 
         }).showToast();
     }
 
     window.onload = function () {
         <?php if (!empty($errors)): ?>
-            // Loop through each error and display it with Toastify
+           
             <?php foreach ($errors as $error): ?>
                 showToast("<?php echo addslashes($error); ?>");
             <?php endforeach; ?>

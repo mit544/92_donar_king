@@ -47,9 +47,13 @@ $lang['signup_lname'] = 'Nom';
 $lang['Email_id'] = 'Adresse e-mail';
 $lang['password'] = 'Mot de passe';
 $lang['password_show'] = 'Afficher';
+$lang['password_comfirm'] = 'Confirmez votre mot de passe';
 $lang['Sign_in'] = 'Se connecter';
 $lang['already_member'] = 'Déjà membre?';
 $lang['Cancel'] = 'Annuler';
+
+$lang['toast'] = 'Bienvenue chez 92donar king !!';
+$lang['future_function'] = 'Cette fonctionnalité sera bientôt disponible !';
 
 // Connexion
 $lang['signin_head'] = 'Connectez-vous à votre compte';

@@ -56,9 +56,15 @@ $lang['signup_lname'] = 'Last Name';
 $lang['Email_id'] = 'Email address';
 $lang['password'] = 'Password';
 $lang['password_show'] = 'Show';
+$lang['password_comfirm'] = 'Comfirm Your Password ';
 $lang['Sign_in'] = 'Sign in';
 $lang['already_member'] = 'Already a member?';
 $lang['Cancel'] = 'Cancel';
+
+// toast 
+$lang['toast'] = 'welcome to 92 doner king';
+$lang['future_function'] = 'This feature is coming soon!!';
+
 
 
 // sign in

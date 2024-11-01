@@ -25,17 +25,33 @@ if (!file_exists($lang_file)) {
     $lang_file = "./lang/lang.{$lang}.php";
 }
 
+
 include_once $lang_file;
 
 // error hangling if the file is missing in the directery
 if (!isset($lang) || !is_array($lang)) {
     die('Language file is missing or incorrect.');
 }
+
+include './php_scripts/connection.php'; 
+
+// Retrieve and clear error messages and form data from the session
+$errors = $_SESSION['errors'] ?? [];
+
+// $form_data = $_SESSION['form_data'] ?? [];
+$show_popup = $_SESSION['show_popup'] ?? null;
+$show_loginpopup = $_SESSION['show_loginpopup'] ?? null;
+$errors_log_in = $_SESSION['errors_log_in'] ?? [];
+
+// Clear session data to prevent errors on reload
+unset($_SESSION['errors'], $_SESSION['show_popup'], $_SESSION['show_loginpopup'],  $_SESSION['errors_log_in']);
+
 ?>
 
 
 <!DOCTYPE html>
 <html>
+    <script>console.log(<? php echo $show_popup ?>)</script>
 
     <head>
         <meta charset="UTF-8">
@@ -49,6 +65,8 @@ if (!isset($lang) || !is_array($lang)) {
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
 
+        <!-- toastify -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
         <!-- font - kanit -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,12 +94,12 @@ if (!isset($lang) || !is_array($lang)) {
                         class="active px-3 mx-1 hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg">
                         <?php echo $lang['MENU_HOME'] ?>
                     </a>
-                    <a onClick="showAlert()"
-                        class=" px-3 mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg">
+                    <a onclick='FutureFeature()'
+                        class=" px-3 cursor-pointer mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg">
                         <?php echo $lang['MENU_ABOUT_US'] ?>
                     </a>
-                    <a onClick="showAlert()"
-                        class=" px-3 mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg">
+                    <a onclick="FutureFeature()"
+                        class=" px-3 cursor-pointer mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg">
                         <?php echo $lang['MENU_CONTACT_US'] ?>
                     </a>
                 </div>
@@ -117,7 +135,7 @@ if (!isset($lang) || !is_array($lang)) {
                     <?php echo $lang['PAGE_TITLE'] ?? 'Welcome'; ?>
                 </h1>
                 <div class="mt-14">
-                    <button
+                    <button onclick='FutureFeature()'
                         class=" bg-red-400 text-white font-bold px-4 py-4 rounded-xl shadow-2xl hover:shadow transition-shadow delay-75 hover:bg-red-500">
                         <?php echo $lang['book_button'] ?? 'Book a Table'; ?>
                     </button>
@@ -319,15 +337,22 @@ if (!isset($lang) || !is_array($lang)) {
                         <div class="flex min-h-full flex-col justify-center px-6 py-10 lg:px-8">
                             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                                 <img class="mx-auto h-20 w-auto" src="./images/icon.png" alt="Your Company">
-                                <h2 class="mt-2 text-center text-2xl/9 font-bold tracking-tight text-gray-900"><?php echo $lang['signup_head'] ?? 'Enter your details to register'; ?></h2>
+                                <h2 class="mt-2 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+                                    <?php echo $lang['signup_head'] ?? 'Enter your details to register'; ?>
+                                </h2>
                             </div>
 
                             <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-                                <form class="space-y-6" action="#" method="POST">
 
 
+
+
+
+                                <form class="space-y-6" action="./php_scripts/sign_up.php" method="post">
                                     <div>
-                                        <label for="fname" class="block text-sm/6 font-medium text-gray-900"><?php echo $lang['signup_fname'] ?? 'First Name'; ?></label>
+                                        <label for="fname" class="block text-sm/6 font-medium text-gray-900">
+                                            <?php echo $lang['signup_fname'] ?? 'First Name'; ?>
+                                        </label>
                                         <div class="mt-2">
                                             <input id="fname" name="fname" type="text" autocomplete="fname" required
                                                 class="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -335,7 +360,9 @@ if (!isset($lang) || !is_array($lang)) {
                                     </div>
 
                                     <div>
-                                        <label for="lname" class="block text-sm/6 font-medium text-gray-900"><?php echo $lang['signup_lname'] ?? 'Last Name'; ?></label>
+                                        <label for="lname" class="block text-sm/6 font-medium text-gray-900">
+                                            <?php echo $lang['signup_lname'] ?? 'Last Name'; ?>
+                                        </label>
                                         <div class="mt-2">
                                             <input id="lname" name="lname" type="text" autocomplete="lname" required
                                                 class="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -343,17 +370,21 @@ if (!isset($lang) || !is_array($lang)) {
                                     </div>
 
                                     <div>
-                                        <label for="email" class="block text-sm/6 font-medium text-gray-900"><?php echo $lang['Email_id'] ?? 'Email address'; ?></label>
+                                        <label for="email" class="block text-sm/6 font-medium text-gray-900">
+                                            <?php echo $lang['Email_id'] ?? 'Email address'; ?>
+                                        </label>
                                         <div class="mt-2">
-                                            <input id="email" name="email" type="email" autocomplete="email" required
-                                                class="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                            <input id="email" name="username" type="email" autocomplete="email" required
+                                                class="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"
+                                                value="">
                                         </div>
                                     </div>
 
                                     <div>
                                         <div class="flex items-center justify-between">
-                                            <label for="password"
-                                                class="block text-sm font-medium text-gray-900"><?php echo $lang['password'] ?? 'Password'; ?></label>
+                                            <label for="password" class="block text-sm font-medium text-gray-900">
+                                                <?php echo $lang['password'] ?? 'Password'; ?>
+                                            </label>
                                             <button type="button" onclick="togglePassword()"
                                                 class="text-red-500 text-sm font-medium hover:underline">
                                                 <?php echo $lang['password_show'] ?? 'Show'; ?>
@@ -362,26 +393,53 @@ if (!isset($lang) || !is_array($lang)) {
                                         <div class="mt-2 relative">
                                             <input id="password" name="password" type="password"
                                                 autocomplete="current-password" required
-                                                class="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+                                                class="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>"
+                                                value="<?php echo $password; ?>">
+                                            <p class="text-red-500">
+                                                <?php echo $errors['password_err'] ?? ''; ?>
+                                            </p>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <button type="submit"
-                                            class="flex w-full justify-center rounded-md bg-red-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"><?php echo $lang['Sign_in'] ?? 'Sign in'; ?></button>
+                                        <div class="flex items-center justify-between">
+                                            <label for="confirm_password"
+                                                class="block text-sm font-medium text-gray-900">
+                                                <?php echo $lang['password_comfirm'] ?? 'Comfirm Your Password'; ?>
+                                            </label>
+                                        </div>
+                                        <div class="mt-2 relative">
+                                            <input id="confirm_password" name="confirm_password" type="password"
+                                                autocomplete="current-password" required
+                                                class="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>"
+                                                value="<?php echo $password; ?>">
+                                            <p class="text-red-500">
+                                                <?php echo $errors['confirm_password_err'] ?? ''; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <button type="submit" value="submit"
+                                            class="flex w-full justify-center rounded-md bg-red-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                            <?php echo $lang['Sign_in'] ?? 'Sign in'; ?>
+                                        </button>
                                     </div>
                                 </form>
 
                                 <p class="mt-10 text-center text-sm/6 text-gray-500">
 
-                                    <a onclick="alreadyMember()"
-                                        class="font-semibold text-red-400 hover:text-red-600"><?php echo $lang['already_member'] ?? 'Already a member?'; ?></a>
+                                    <a onclick="alreadyMember()" class="font-semibold text-red-400 hover:text-red-600">
+                                        <?php echo $lang['already_member'] ?? 'Already a member?'; ?>
+                                    </a>
                                 </p>
                             </div>
                         </div>
                         <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                             <button onclick="closeSignupModel()" type="button"
-                                class=" inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-500 hover:text-white transition-bg delayed-100 sm:mt-0 sm:w-auto"><?php echo $lang['Cancel'] ?? 'Cancel'; ?></button>
+                                class=" inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-500 hover:text-white transition-bg delayed-100 sm:mt-0 sm:w-auto">
+                                <?php echo $lang['Cancel'] ?? 'Cancel'; ?>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -400,23 +458,31 @@ if (!isset($lang) || !is_array($lang)) {
                         <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
                             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                                 <img class="mx-auto h-20 w-auto" src="./images/icon.png" alt="Your Company">
-                                <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900"><?php echo $lang['signin_head'] ?? 'Sign in to your account'; ?></h2>
+                                <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+                                    <?php echo $lang['signin_head'] ?? 'Sign in to your account'; ?>
+                                </h2>
                             </div>
 
                             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                                <form class="space-y-6" action="#" method="POST">
+                                <form class="space-y-6" action="./php_scripts/log_in.php" method="POST">
+                                    <!-- Email Field -->
                                     <div>
-                                        <label for="email" class="block text-sm/6 font-medium text-gray-900"><?php echo $lang['Email_id'] ?? 'Email address'; ?></label>
+                                        <label for="email" class="block text-sm font-medium text-gray-900">
+                                            <?php echo $lang['Email_id'] ?? 'Email address'; ?>
+                                        </label>
                                         <div class="mt-2">
                                             <input id="email" name="email" type="email" autocomplete="email" required
-                                                class="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                                class="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
                                         </div>
                                     </div>
 
+                                    <!-- Password Field with Toggle -->
                                     <div>
                                         <div class="flex items-center justify-between">
                                             <label for="password_sign_in"
-                                                class="block text-sm font-medium text-gray-900"><?php echo $lang['password'] ?? 'Password'; ?></label>
+                                                class="block text-sm font-medium text-gray-900">
+                                                <?php echo $lang['password'] ?? 'Password'; ?>
+                                            </label>
                                             <button type="button" onclick="togglePasswordSignIn()"
                                                 class="text-red-500 text-sm font-medium hover:underline">
                                                 <?php echo $lang['password_show'] ?? 'Show'; ?>
@@ -429,23 +495,42 @@ if (!isset($lang) || !is_array($lang)) {
                                         </div>
                                     </div>
 
-
+                                    <!-- Submit Button -->
                                     <div>
                                         <button type="submit"
-                                            class="flex w-full justify-center rounded-md bg-red-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"><?php echo $lang['Sign_in'] ?? 'Sign in'; ?></button>
+                                            class="flex w-full justify-center rounded-md bg-red-500 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                            <?php echo $lang['Sign_in'] ?? 'Sign in'; ?>
+                                        </button>
                                     </div>
+
+                                    <!-- Display Error Message if any -->
+                                    <?php if (!empty($error)): ?>
+                                    <p class="text-red-500 text-sm mt-2">
+                                        <?php echo htmlspecialchars($error); ?>
+                                    </p>
+                                    <?php endif; ?>
                                 </form>
 
+                                <script>
+                                    function togglePasswordSignIn() {
+                                        const passwordField = document.getElementById("password_sign_in");
+                                        passwordField.type = passwordField.type === "password" ? "text" : "password";
+                                    }
+                                </script>
+
                                 <p class="mt-10 text-center text-sm/6 text-gray-500">
-                                <?php echo $lang['notamember'] ?? 'Not a member?'; ?>
-                                    <a onclick="newToTeam()"
-                                        class="font-semibold text-red-400 hover:text-red-600"><?php echo $lang['regyourself'] ?? 'Register yourself'; ?></a>
+                                    <?php echo $lang['notamember'] ?? 'Not a member?'; ?>
+                                    <a onclick="newToTeam()" class="font-semibold text-red-400 hover:text-red-600">
+                                        <?php echo $lang['regyourself'] ?? 'Register yourself'; ?>
+                                    </a>
                                 </p>
                             </div>
                         </div>
                         <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                             <button onclick="closeSignInPopUp()" type="button"
-                                class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-500 hover:text-white transition-bg delayed-100 sm:mt-0 sm:w-auto"><?php echo $lang['Cancel'] ?? 'Cancel'; ?></button>
+                                class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-500 hover:text-white transition-bg delayed-100 sm:mt-0 sm:w-auto">
+                                <?php echo $lang['Cancel'] ?? 'Cancel'; ?>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -458,12 +543,12 @@ if (!isset($lang) || !is_array($lang)) {
                     href="index.php">
                     <?php echo $lang['MENU_HOME'] ?>
                 </a>
-                <a class="px-3 mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
-                    onClick="showAlert()">
+                <a class="px-3 cursor-pointer mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
+                onclick="FutureFeature()">
                     <?php echo $lang['MENU_ABOUT_US'] ?>
                 </a>
-                <a class=" px-3 mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
-                    onClick="showAlert()">
+                <a class=" px-3 cursor-pointer mx-1 text-black hover:text-red-500 hover:font-bold py-1 hover:transition-bg delay-50 hover:transition-colors rounded-lg"
+                onclick="FutureFeature()">
                     <?php echo $lang['MENU_CONTACT_US'] ?>
                 </a>
             </div>
@@ -517,7 +602,26 @@ if (!isset($lang) || !is_array($lang)) {
 
         </footer>
 
+        <!-- toastify -->
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/pagedone@1.2.2/src/js/pagedone.js"></script>
+
+
+        <script>
+        function FutureFeature()  {
+            Toastify({
+                text: "<?php echo $lang['future_function'] ?? 'This feature is coming soon!!'; ?>",
+                duration: 3000,
+                gravity: "top",
+                position: "left",
+                backgroundColor: "#1f5a0e",
+            }).showToast();
+        }
+        
+        </script>
+        
+        
         <!-- for reloading the page after selecting the language -->
         <script>
             document.getElementById('language-select').addEventListener('change', function () {
@@ -535,6 +639,7 @@ if (!isset($lang) || !is_array($lang)) {
                 document.getElementById("signupmodel").classList.add("hidden");
             }
 
+
             function openSignInPopUp() {
                 document.getElementById("signinmodal").classList.remove("hidden");
             }
@@ -543,7 +648,7 @@ if (!isset($lang) || !is_array($lang)) {
                 document.getElementById("signinmodal").classList.add("hidden");
             }
 
-            function newToTeam() {
+            function newToTeam() { 
                 document.getElementById("signinmodal").classList.add("hidden");
                 document.getElementById("signupmodel").classList.remove("hidden");
                 alert('new to team');
@@ -584,6 +689,49 @@ if (!isset($lang) || !is_array($lang)) {
             }
 
         </script>
+
+        <?php if ($show_popup === true): ?>
+        <script>
+        <? php foreach($errors as $error): ?>
+                Toastify({
+                    text: "<?php echo $error; ?>",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "left",
+                    backgroundColor: "#ff0303",
+                }).showToast();
+        <? php endforeach; ?>
+                openSignupModel();
+        </script>
+
+        <?php elseif ($show_popup === false): ?>
+        <script>
+            Toastify({
+                text: "Welcome to 92 Doner King! Please log in.",
+                duration: 3000,
+                gravity: "top",
+                position: "left",
+                backgroundColor: "#1f5a0e",
+            }).showToast();
+            openSignInPopUp();
+        </script>
+
+        <?php endif; ?>
+
+        <?php if ($show_loginpopup === true): ?>
+    <script>
+        <?php foreach ($errors_log_in as $error): ?>
+            Toastify({
+                text: "<?php echo htmlspecialchars($error); ?>",
+                duration: 3000,
+                gravity: "top",
+                position: "left",
+                backgroundColor: "#ff0303",
+            }).showToast();
+        <?php endforeach; ?>
+        openSignInPopUp(); // Function to open the login popup
+    </script>
+<?php endif; ?>
 
     </body>
 

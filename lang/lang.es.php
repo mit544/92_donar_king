@@ -32,6 +32,11 @@ $lang['MENU_CONTACT_US'] = 'Contáctanos';
 $lang['Log_in_button'] = 'Iniciar Sesión';
 $lang['Sign_up_button'] = 'Registrarse';
 
+// staff
+$lang['messages_es'] = 'Mensajes';
+$lang['notes_es'] = 'Tomar Notas';
+
+
 // footer
 $lang['footer_home'] = 'Inicio';
 $lang['footer_about'] = 'Sobre nosotros';

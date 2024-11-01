@@ -38,13 +38,14 @@ include './php_scripts/connection.php';
 // Retrieve and clear error messages and form data from the session
 $errors = $_SESSION['errors'] ?? [];
 
-// $form_data = $_SESSION['form_data'] ?? [];
+$form_data = $_SESSION['form_data'] ?? [];
 $show_popup = $_SESSION['show_popup'] ?? null;
 $show_loginpopup = $_SESSION['show_loginpopup'] ?? null;
 $errors_log_in = $_SESSION['errors_log_in'] ?? [];
 
 // Clear session data to prevent errors on reload
 unset($_SESSION['errors'], $_SESSION['show_popup'], $_SESSION['show_loginpopup'],  $_SESSION['errors_log_in']);
+
 
 ?>
 
@@ -68,6 +69,9 @@ unset($_SESSION['errors'], $_SESSION['show_popup'], $_SESSION['show_loginpopup']
 
         <!-- toastify -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
         <!-- font - kanit -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,7 +83,7 @@ unset($_SESSION['errors'], $_SESSION['show_popup'], $_SESSION['show_loginpopup']
     <body>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <header class="bg-white shadow-md">
-            <nav class="container mx-auto py-3">
+            <nav class="container mx-auto px-4 py-3">
                 <div class="flex flex-wrap items-center justify-between">
                     <!-- Logo -->
                     <div class="flex items-center">
@@ -101,15 +105,15 @@ unset($_SESSION['errors'], $_SESSION['show_popup'], $_SESSION['show_loginpopup']
                     <div id="menu" class="hidden w-full lg:flex lg:items-center lg:w-auto mt-4 lg:mt-0">
                         <div class="text-sm lg:flex-grow">
                             <a href="#"
-                                class="active block mt-4 lg:inline-block lg:mt-0 text-lg font-normal text-red-400 hover:text-red-500 mr-4">
+                                class="active block mt-4 lg:inline-block lg:mt-0 text-lg  text-red-400 hover:text-red-500 mr-4">
                                 <?php echo $lang['MENU_HOME'] ?>
                             </a>
                             <a href="#" onclick='FutureFeature()'
-                                class="block mt-4 lg:inline-block lg:mt-0 text-lg font-normal text-black hover:text-red-500 mr-4">
+                                class="block mt-4 lg:inline-block lg:mt-0 text-lg  text-black hover:text-red-500 mr-4">
                                 <?php echo $lang['MENU_ABOUT_US'] ?>
                             </a>
                             <a href="#" onclick="FutureFeature()"
-                                class="block mt-4 lg:inline-block lg:mt-0 text-lg font-normal text-black hover:text-red-500">
+                                class="block mt-4 lg:inline-block lg:mt-0 text-lg  text-black hover:text-red-500">
                                 <?php echo $lang['MENU_CONTACT_US'] ?>
                             </a>
                         </div>
@@ -717,7 +721,30 @@ unset($_SESSION['errors'], $_SESSION['show_popup'], $_SESSION['show_loginpopup']
 
         </script>
 
-        <?php if ($show_popup === true): ?>
+
+            
+   <!-- logout toast -->
+        <script>
+
+            function showLogOutToast() {
+                Toastify({
+                    text: "You are successfully logged out!!",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "left",
+                    backgroundColor: "#1f5a0e",
+                }).showToast();
+            }
+
+            window.onload = function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has('logout') && urlParams.get('logout') === 'success') {
+                    showLogOutToast();
+                }
+            };
+        </script>
+        <!-- login popup -->
+<?php if ($show_popup === true): ?>
         <script>
         <? php foreach($errors as $error): ?>
                 Toastify({
@@ -746,39 +773,42 @@ unset($_SESSION['errors'], $_SESSION['show_popup'], $_SESSION['show_loginpopup']
         <?php endif; ?>
 
         <?php if ($show_loginpopup === true): ?>
-        <script>
-        <? php foreach($errors_log_in as $error): ?>
-                Toastify({
-                    text: "<?php echo htmlspecialchars($error); ?>",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "left",
-                    backgroundColor: "#ff0303",
-                }).showToast();
-        <? php endforeach; ?>
-                openSignInPopUp(); // Function to open the login popup
-        </script>
-        <?php endif; ?>
-        <script>
-    // Function to show the toast notification
-    function showToast() {
-        Toastify({
-                text: "You are successfully logged out!!",
+    <script>
+        <?php foreach ($errors_log_in as $error): ?>
+            Toastify({
+                text: "<?php echo htmlspecialchars($error); ?>",
                 duration: 3000,
                 gravity: "top",
                 position: "left",
-                backgroundColor: "#1f5a0e",
+                backgroundColor: "#ff0303",
             }).showToast();
+        <?php endforeach; ?>
+        openSignInPopUp(); // Function to open the login popup
+    </script>
+<?php endif; ?>
+<script>
+    // Function to display Toastify notifications for each error
+    function showToast(message) {
+        Toastify({
+            text: message,
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#e74c3c", // Red background for errors
+        }).showToast();
     }
 
-    // Show the toast if the logout query parameter is set
-    window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('logout') && urlParams.get('logout') === 'success') {
-            showToast();
-        }
+    window.onload = function () {
+        <?php if (!empty($errors)): ?>
+            // Loop through each error and display it with Toastify
+            <?php foreach ($errors as $error): ?>
+                showToast("<?php echo addslashes($error); ?>");
+            <?php endforeach; ?>
+        <?php endif; ?>
     };
 </script>
+
+
 
     </body>
 

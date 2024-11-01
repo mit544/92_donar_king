@@ -36,7 +36,7 @@ if (!isset($lang) || !is_array($lang)) {
 include './php_scripts/connection.php'; 
 
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php"); // Redirect to login if not authenticated
+    header("Location: index.php");
     exit();
 }
 
@@ -99,11 +99,11 @@ $user = $_SESSION['user'];
                             </a>
                             <a href="#" onclick='FutureFeature()'
                                 class="block mt-4 lg:inline-block lg:mt-0 text-lg font-normal text-black hover:text-red-500 mr-4">
-                                <?php echo $lang['MENU_ABOUT_US'] ?>
+                                <?php echo $lang['messages'] ?>
                             </a>
                             <a href="#" onclick="FutureFeature()"
                                 class="block mt-4 lg:inline-block lg:mt-0 text-lg font-normal text-black hover:text-red-500">
-                                <?php echo $lang['MENU_CONTACT_US'] ?>
+                                <?php echo $lang['notes'] ?>
                             </a>
                         </div>
                     </div>
@@ -157,7 +157,7 @@ $user = $_SESSION['user'];
                     </button>
                     <!-- helping popup -->
                     <div class="modal-overlay hidden" data-modal="modal3">
-                        <div class="modal-container w-90">
+                        <div class="modal-container w-100 mx-20 ">
                             <div class="flex justify-between items-center pb-4 border-b">
                                 <h4 class="text-sm font-medium">
                                     <?php echo $lang['need_help'] ?? 'Need Help?'; ?>
@@ -486,7 +486,7 @@ $user = $_SESSION['user'];
             }
             function NotUpdated() {
                 Toastify({
-                    text: "The item has updated",
+                    text: "The item hasn't updated",
                     duration: 3000,
                     gravity: "top",
                     position: "left",
@@ -500,7 +500,7 @@ $user = $_SESSION['user'];
                 if (urlParams.has('stock') && urlParams.get('stock') === 'updated') {
                     Updated();
                 }
-                else{
+                elseif (urlParams.has('stock') && urlParams.get('stock') === 'negative') {
                     NotUpdated()
                 }
             };

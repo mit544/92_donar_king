@@ -32,6 +32,10 @@ $lang['MENU_CONTACT_US'] = 'Contactez-nous';
 $lang['Log_in_button'] = 'Se Connecter';
 $lang['Sign_up_button'] = 'S\'inscrire';
 
+// staff
+$lang['messages_fr'] = 'Messages';
+$lang['notes_fr'] = 'Prendre des Notes';
+
 // footer
 $lang['footer_home'] = 'Accueil';
 $lang['footer_about'] = 'À propos';

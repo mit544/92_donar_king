@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['product_id'], $_POST[
     $product_id = (int)$_POST['product_id'];
     $new_quantity = (int)$_POST['new_quantity'];
 
-    if ($new_quantity >= 0) {
+    if ($new_quantity >= 1) {
         $stmt = $link->prepare("UPDATE stock SET item_quantity = ? WHERE product_id = ?");
         $stmt->bind_param("ii", $new_quantity, $product_id);
 
@@ -51,7 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['product_id'], $_POST[
             $errors[] = "Error updating stock. Please try again.";
         }
         $stmt->close();
-    } else {
+    }
+    
+    elseif($new_quantity === 0) {
+        header("Location: ../staff_dashboard.php?stock=empty");
+
+        $errors[] = "Quantity cannot be empty.";
+    }
+    else {
         $errors[] = "Quantity cannot be negative.";
     }
 }

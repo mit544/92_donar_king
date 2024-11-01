@@ -21,13 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_result($id, $name, $email, $hashed_password, $position);
             $stmt->fetch();
 
-            // Verify password
+
             if (password_verify($password, $hashed_password)) {
-                // Clear error session on successful login
                 unset($_SESSION['errors_log_in']);
                 unset($_SESSION['show_loginpopup']);
 
-                // Store user data in session
                 $_SESSION['user'] = [
                     'id' => $id,
                     'email' => $email,
@@ -36,16 +34,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ];
                 // Redirect based on user position
                 if ($position === 'staff') {
-                header("Location: ../staff_dashboard.php?login=success");
-
+                    header("Location: ../staff_dashboard.php?login=success");
                 } elseif ($position === 'manager') {
                     header("Location: ./manager_dashboard.php");
                 } elseif ($position === 'ceo') {
                     header("Location: ./ceo_dashboard.php");
                 } else {
-                    //
                     header("Location: ../default_dashboard.php");
-
                 }
                 exit();
             } else {
@@ -54,15 +49,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $errors_log_in[] = "No account found with that email address.";
         }
+        
         $stmt->close();
     }
+}
 
-    if (!empty($errors_log_in)) {
-        $_SESSION['show_loginpopup'] = true;
-        $_SESSION['errors_log_in'] = $errors_log_in;
-        header("Location: ../index.php");
-        exit();
-    }
+
+if (!empty($errors_log_in)) {
+    $_SESSION['show_loginpopup'] = true;
+    $_SESSION['errors_log_in'] = $errors_log_in;
+    header("Location: ../index.php?login=error");
+    exit();
 }
 
 $link->close();

@@ -1,0 +1,32 @@
+/* responsive design */
+
+.footer-links a {
+    min-width: 80px;
+}
+
+.footer-links {
+    flex-direction: column;
+}
+
+/* Small Screens (mobile) */
+@media (min-width: 640px) {
+    .footer-links {
+        flex-direction: row;
+    }
+}
+
+/* Medium Screens (tablets and above) */
+@media (min-width: 768px) {
+    .footer-links a {
+        padding: 0.5rem 1rem;
+    }
+
+    .footer-links {
+        flex-direction: row;
+    }
+
+    .button svg {
+        width: 28px;
+        height: 28px;
+    }
+}

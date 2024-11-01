@@ -12,13 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors_log_in[] = "Please enter both email and password.";
     } else {
         // Update query to retrieve staff_position as well
-        $stmt = $link->prepare("SELECT staff_id, staff_email, staff_password, staff_position FROM staff WHERE staff_email = ?");
+        $stmt = $link->prepare("SELECT staff_id, staff_fname, staff_email, staff_password, staff_position FROM staff WHERE staff_email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows == 1) {
-            $stmt->bind_result($id, $email, $hashed_password, $position);
+            $stmt->bind_result($id, $name, $email, $hashed_password, $position);
             $stmt->fetch();
 
             // Verify password
@@ -28,19 +28,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 unset($_SESSION['show_loginpopup']);
 
                 // Store user data in session
-                $_SESSION['user_id'] = $id;
-                $_SESSION['user_email'] = $email;
-                $_SESSION['user_position'] = $position;
-
+                $_SESSION['user'] = [
+                    'id' => $id,
+                    'email' => $email,
+                    'name' => $name,
+                    'position' => $position
+                ];
                 // Redirect based on user position
                 if ($position === 'staff') {
-                    header("Location: ../staff_dashboard.php");
+                header("Location: ../staff_dashboard.php?login=success");
+
                 } elseif ($position === 'manager') {
-                    header("Location: ../manager_dashboard.php");
+                    header("Location: ./manager_dashboard.php");
                 } elseif ($position === 'ceo') {
-                    header("Location: ../ceo_dashboard.php");
+                    header("Location: ./ceo_dashboard.php");
                 } else {
-                    // Fallback or default page
+                    //
                     header("Location: ../default_dashboard.php");
 
                 }

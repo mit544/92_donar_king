@@ -39,6 +39,8 @@ $lang['footer_contact'] = 'Contactez-nous';
 $lang['footer_heading'] = '92 Doner King';
 $lang['footer_subheading'] = 'Chaque bouchée compte';
 $lang['footer_copyright'] = 'Copyright &copy; 2024 | 92DonerKing Tous droits réservés';
+$lang['footer_heading_for_staff'] = 'Vous êtes connecté en tant que personnel';
+
 
 // Inscription
 $lang['signup_head'] = 'Entrez vos informations pour vous inscrire';
@@ -60,5 +62,9 @@ $lang['signin_head'] = 'Connectez-vous à votre compte';
 $lang['notamember'] = 'Pas encore membre?';
 $lang['Sign_in'] = 'Se connecter';
 $lang['regyourself'] = 'Inscrivez-vous';
+$lang['logout'] = 'Se déconnecter';
+
+// staff dashboard
+$lang['welcome_staff'] = 'Bienvenue';
 
 ?>

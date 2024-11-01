@@ -46,6 +46,7 @@ $lang['footer_home'] = 'Home';
 $lang['footer_about'] = 'About us';
 $lang['footer_contact'] = 'Contact us';
 $lang['footer_heading'] = '92 Doner King';
+$lang['footer_heading_for_staff'] = 'You are Logged in as a Staff';
 $lang['footer_subheading'] = 'Every bites matters';
 $lang['footer_copyright'] = 'Copyright &copy; 2024 | 92DonerKing All rights reserved';
 
@@ -72,4 +73,9 @@ $lang['signin_head'] = 'Sign in to your account';
 $lang['notamember'] = 'Not a member?';
 $lang['Sign_in'] = 'Sign in';
 $lang['regyourself'] = 'Register yourself';
+$lang['logout'] = 'Log out';
+
+// staff dashboard
+$lang['welcome_staff'] = 'Welcome';
+
 ?>

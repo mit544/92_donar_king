@@ -1,38 +1,38 @@
 <?php
 session_start();
-require_once './connection.php';
+require_once(__DIR__ . '/connection.php');
 
 // Initialize error and success messages
-$errors_log_in = [];
+$errors = [];
 $success = "";
 
 // Fetch stock items
-$sql = "SELECT product_id, item_name, quantity, product_added_date, updated_at FROM products";
+$sql = "SELECT product_id, item_name, item_image, item_quantity, item_updated_at FROM stock";
 $result = $link->query($sql);
-$stockItems = [];
-while ($row = $result->fetch_assoc()) {
-    $stockItems[] = $row;
+
+if ($result) {
+    $stockItems = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+    $errors[] = "Failed to retrieve stock items. Please check the database connection or query.";
 }
 
-// Handle note submission (assuming you have a `stock_notes` table for notes)
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['note'], $_POST['product_id'])) {
-    $note = trim($_POST['note']);
+// Handle quantity update if form was submitted
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['product_id'], $_POST['new_quantity'])) {
     $product_id = (int)$_POST['product_id'];
-    $user_id = $_SESSION['user_id']; // assuming user is logged in and has a user ID
+    $new_quantity = (int)$_POST['new_quantity'];
 
-    // Check if note and product ID are not empty
-    if (!empty($note) && $product_id) {
-        // Insert note into `stock_notes` table
-        $stmt = $link->prepare("INSERT INTO stock_notes (stock_id, user_id, note) VALUES (?, ?, ?)");
-        $stmt->bind_param("iis", $product_id, $user_id, $note);
-        
+    if ($new_quantity >= 0) {
+        $stmt = $link->prepare("UPDATE products SET item_quantity = ? WHERE product_id = ?");
+        $stmt->bind_param("ii", $new_quantity, $product_id);
+
         if ($stmt->execute()) {
-            $success = "Note added successfully!";
+            $success = "Stock updated successfully!";
         } else {
-            $errors_log_in[] = "Error adding note. Try again.";
+            $errors[] = "Error updating stock. Please try again.";
         }
+        $stmt->close();
     } else {
-        $errors_log_in[] = "Note and Product ID cannot be empty.";
+        $errors[] = "Quantity cannot be negative.";
     }
 }
 

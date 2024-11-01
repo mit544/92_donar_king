@@ -149,43 +149,213 @@ $user = $_SESSION['user'];
                     <p class="text-xl text-gray-400">
                         <?php echo $lang['footer_heading_for_staff']; ?>
                     </p>
+
+                    <button type="button"
+                        class="btn btn-primary mt-4 open-modal w-full sm:w-auto bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500"
+                        data-modal="modal3">
+                        <?php echo $lang['need_help'] ?? 'Need Help?'; ?>
+                    </button>
+                    <!-- helping popup -->
+                    <div class="modal-overlay hidden" data-modal="modal3">
+                        <div class="modal-container w-90">
+                            <div class="flex justify-between items-center pb-4 border-b">
+                                <h4 class="text-sm font-medium">
+                                    <?php echo $lang['need_help'] ?? 'Need Help?'; ?>
+                                </h4>
+                                <button class="close-modal" data-modal="modal3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M7.75732 7.75739L16.2426 16.2427M16.2426 7.75739L7.75732 16.2427"
+                                            stroke="black" stroke-width="1.6" stroke-linecap="round"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="font-bold text-red-500 text-lg block mb-2">
+                                <?php echo $lang['need_help_title']; ?>
+                            </span>
+
+                            <ol class="list-decimal text-black font-normal list-inside space-y-4">
+                                <li><strong>
+                                        <?php echo $lang['need_help_step1_title']; ?>
+                                    </strong>
+                                    <br>
+                                    <?php echo $lang['need_help_step1_desc']; ?>
+                                </li>
+
+                                <li><strong>
+                                        <?php echo $lang['need_help_step2_title']; ?>
+                                    </strong>
+                                    <br>
+                                    <?php echo $lang['need_help_step2_desc']; ?>
+                                </li>
+
+                                <li><strong>
+                                        <?php echo $lang['need_help_step3_title']; ?>
+                                    </strong>
+                                    <br>
+                                    <?php echo $lang['need_help_step3_desc']; ?>
+                                </li>
+
+                                <li><strong>
+                                        <?php echo $lang['need_help_step4_title']; ?>
+                                    </strong>
+                                    <br>
+                                    <?php echo $lang['need_help_step4_desc']; ?>
+                                </li>
+
+                                <li><strong>
+                                        <?php echo $lang['need_help_step5_title']; ?>
+                                    </strong>
+                                    <br>
+                                    <?php echo $lang['need_help_step5_desc']; ?>
+                                </li>
+
+                                <li><strong>
+                                        <?php echo $lang['need_help_step6_title']; ?>
+                                    </strong>
+                                    <br>
+                                    <?php echo $lang['need_help_step6_desc']; ?>
+                                </li>
+
+                                <li><strong>
+                                        <?php echo $lang['need_help_step7_title']; ?>
+                                    </strong>
+                                    <br>
+                                    <?php echo $lang['need_help_step7_desc']; ?>
+                                </li>
+                            </ol>
+                            <div class="flex items-center justify-end pt-4 border-t space-x-4">
+                                <button type="button"
+                                    class="btn btn-primary close-modal bg-red-400 text-white px-3 py-2 rounded-xl shadow-sm shadow-red-700 hover:shadow transition-shadow delay-75 hover:bg-red-500"
+                                    data-modal="modal3">
+                                    <?php echo $lang['hygiene_ok'] ?? 'Okay, got it'; ?>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- script for popup -->
+                    <script>
+                        // Function to open a modal
+                        function openModal(modalId) {
+                            const modal = document.querySelector(`.modal-overlay[data-modal="${modalId}"]`);
+                            modal.classList.remove('hidden');
+                            document.body.classList.add('modal-open'); // Disable body scroll
+                            setTimeout(() => modal.querySelector('.modal-container').classList.add('active'), 100);
+                        }
+
+                        // Function to close a modal
+                        function closeModal(modalId) {
+                            const modal = document.querySelector(`.modal-overlay[data-modal="${modalId}"]`);
+                            modal.querySelector('.modal-container').classList.remove('active');
+                            setTimeout(() => {
+                                modal.classList.add('hidden');
+                                document.body.classList.remove('modal-open'); // Re-enable body scroll
+                            }, 500);
+                        }
+
+                        // Event listeners for opening and closing modals
+                        document.querySelectorAll('.open-modal').forEach(button => {
+                            button.addEventListener('click', function () {
+                                const modalId = this.getAttribute('data-modal');
+                                openModal(modalId);
+                            });
+                        });
+
+                        document.querySelectorAll('.close-modal').forEach(button => {
+                            button.addEventListener('click', function () {
+                                const modalId = this.getAttribute('data-modal');
+                                closeModal(modalId);
+                            });
+                        });
+
+                        // Close modal on outside click
+                        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                            overlay.addEventListener('click', function (e) {
+                                if (e.target === overlay) {
+                                    const modalId = overlay.getAttribute('data-modal');
+                                    closeModal(modalId);
+                                }
+                            });
+                        });
+                    </script>
                 </div>
             </div>
         </section>
+        <div class="border-2 mx-6 my-6 py-4 rounded-xl px-10">
+            <h2 class="text-2xl font-semibold text-red-500 text-center mb-3">
+                <?php echo $lang['avls'] ?>
+            </h2>
 
-        <h2 class="text-xl font-semibold mb-3">Available Stock</h2>
+            <?php include_once "./php_scripts/get_stock.php"; ?>
+            <?php
+            // Pagination setup
+            $itemsPerPage = 6;
+            $totalItems = count($stockItems);
+            $totalPages = ceil($totalItems / $itemsPerPage);
+            $currentPage = isset($_GET['page']) ? max(1, min($totalPages, intval($_GET['page']))) : 1;
+            $offset = ($currentPage - 1) * $itemsPerPage;
+            $itemsToDisplay = array_slice($stockItems, $offset, $itemsPerPage);
+            ?>
 
-        <!-- Include the stock management code here -->
-        <?php include_once "./php_scripts/get_stock.php"; ?>
+            <div class="container mx-auto p-6 bg-white">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <?php foreach ($stockItems as $item): ?>
-            <div class="bg-white p-4 rounded shadow-md">
-                <img src="<?= htmlspecialchars($item['item_image'] ?? 'default.jpg') ?>" alt="Product Image"
-                    class="w-full h-48 object-cover rounded-md mb-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                    <?php foreach ($itemsToDisplay as $item): ?>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md border border-red-200 hover:shadow-lg transition-shadow duration-300">
+                        <img src="<?= htmlspecialchars($item['item_image'] ?? 'default.jpg') ?>" alt="Product Image"
+                            class="w-full h-48 object-cover rounded-md mb-4">
 
-                <h2 class="font-semibold text-lg">
-                    <?= htmlspecialchars($item['item_name']) ?>
-                </h2>
-                <p>Quantity:
-                    <?= htmlspecialchars($item['item_quantity']) ?>
-                </p>
-                <p class="text-sm text-gray-600">Last Updated:
-                    <?= htmlspecialchars($item['item_updated_at']) ?>
-                </p>
+                        <h2 class="font-bold text-xl text-red-600 mb-2">
+                            <?= htmlspecialchars($item['item_name']) ?>
+                        </h2>
+                        <p class="text-gray-700 mb-1">
+                            <span class="font-semibold">
+                                <?php echo $lang['qnt'] ?>:
+                            </span>
+                            <?= htmlspecialchars($item['item_quantity']) ?>
+                        </p>
+                        <p class="text-sm text-gray-500 mb-4">
+                            <span class="font-semibold">
+                                <?php echo $lang['lu'] ?>:
+                            </span>
+                            <?= htmlspecialchars($item['item_updated_at']) ?>
+                        </p>
 
-                <!-- Form to update stock quantity -->
-                <form action="staff_dashboard.php" method="POST" class="mt-3 space-y-2">
-                    <input type="hidden" name="product_id" value="<?= htmlspecialchars($item['product_id']) ?>">
-                    <input type="number" name="new_quantity" value="<?= htmlspecialchars($item['item_quantity']) ?>"
-                        min="0" class="block w-full rounded border-gray-300 p-2 text-sm">
-                    <button type="submit"
-                        class="w-full bg-blue-500 text-white font-semibold py-1 rounded hover:bg-blue-600">
-                        Update Quantity
-                    </button>
-                </form>
+                        <!-- Form to update stock quantity -->
+                        <form action="./php_scripts/get_stock.php" method="POST" class="space-y-3">
+                            <input type="hidden" name="product_id" value="<?= htmlspecialchars($item['product_id']) ?>">
+                            <div class="flex items-center">
+                                <label for="new_quantity_<?= htmlspecialchars($item['product_id']) ?>"
+                                    class="mr-2 text-gray-700 font-semibold">
+                                    <?php echo $lang['nquantity'] ?>:
+                                </label>
+                                <input type="number" id="new_quantity_<?= htmlspecialchars($item['product_id']) ?>"
+                                    name="new_quantity" value="<?= htmlspecialchars($item['item_quantity']) ?>" min="0"
+                                    class="flex-grow rounded border-gray-300 p-2 text-sm focus:border-red-500 focus:ring focus:ring-red-200">
+                            </div>
+                            <button type="submit"
+                                class="w-full bg-red-500 rounded-md text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition-colors duration-200">
+                                <?php echo $lang['uquantity'] ?>
+                            </button>
+                        </form>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <!-- Pagination -->
+                <?php if ($totalPages > 1): ?>
+                <div class="flex justify-center mt-8">
+                    <nav class="inline-flex rounded-md shadow">
+                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <a href="?page=<?= $i ?>"
+                            class="px-4 py-2 <?= $i === $currentPage ? 'bg-red-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50' ?> text-sm font-medium border <?= $i === 1 ? 'rounded-l-md' : ($i === $totalPages ? 'rounded-r-md' : '') ?>">
+                            <?= $i ?>
+                        </a>
+                        <?php endfor; ?>
+                    </nav>
+                </div>
+                <?php endif; ?>
             </div>
-            <?php endforeach; ?>
         </div>
 
         <footer class="pt-8 pb-6 flex flex-col items-center">
@@ -255,7 +425,19 @@ $user = $_SESSION['user'];
         <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/pagedone@1.2.2/src/js/pagedone.js"></script>
+        <?php if (!empty($success)): ?>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <?= htmlspecialchars($success) ?>
+        </div>
+        <?php endif; ?>
 
+        <?php if (!empty($errors)): ?>
+        <?php foreach ($errors as $error): ?>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <?= htmlspecialchars($error) ?>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
 
         <script>
             function FutureFeature() {
@@ -287,6 +469,39 @@ $user = $_SESSION['user'];
                 const urlParams = new URLSearchParams(window.location.search);
                 if (urlParams.has('login') && urlParams.get('login') === 'success') {
                     showToast();
+                }
+            };
+        </script>
+
+        <script>
+
+            function Updated() {
+                Toastify({
+                    text: "The item has updated",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "left",
+                    backgroundColor: "#1f5a0e",
+                }).showToast();
+            }
+            function NotUpdated() {
+                Toastify({
+                    text: "The item has updated",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "left",
+                    backgroundColor: "#1f5a0e",
+                }).showToast();
+            }
+
+            // Show the toast if the logout query parameter is set
+            window.onload = function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has('stock') && urlParams.get('stock') === 'updated') {
+                    Updated();
+                }
+                else{
+                    NotUpdated()
                 }
             };
         </script>

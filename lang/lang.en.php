@@ -77,5 +77,36 @@ $lang['logout'] = 'Log out';
 
 // staff dashboard
 $lang['welcome_staff'] = 'Welcome';
+$lang['need_help'] = 'Need Help?';
+$lang['need_help_title'] = 'Steps for Staff to Update Stock';
+
+$lang['need_help_step1_title'] = 'Log In to the Dashboard:';
+$lang['need_help_step1_desc'] = 'Access the staff dashboard using your credentials.';
+
+$lang['need_help_step2_title'] = 'Navigate to the Inventory Section:';
+$lang['need_help_step2_desc'] = 'Locate and click on the "Inventory" or "Stock Management" tab in the navigation menu.';
+
+$lang['need_help_step3_title'] = 'View Current Stock Levels:';
+$lang['need_help_step3_desc'] = 'Review the current stock levels displayed in a table format. This should include item names, quantities, and any alerts for low stock.';
+
+$lang['need_help_step4_title'] = 'Select an Item to Update:';
+$lang['need_help_step4_desc'] = 'Identify the item you wish to update. You can use search or filter options to find specific products quickly.';
+
+$lang['need_help_step5_title'] = 'Edit Stock Quantity:';
+$lang['need_help_step5_desc'] = '- Click on the "Edit" button next to the item you want to update.<br>- In the edit form, change the stock quantity as needed (e.g., increase or decrease based on new deliveries or sales).';
+
+$lang['need_help_step6_title'] = 'Save Changes:';
+$lang['need_help_step6_desc'] = '- After updating the quantity, click on the "Save" or "Update" button to apply changes.<br>- Confirm that a success message appears, indicating that the stock has been updated successfully.';
+
+$lang['need_help_step7_title'] = 'Log Out:';
+$lang['need_help_step7_desc'] = 'Once all updates are complete, ensure you log out of the system for security purposes.';
+
+$lang['nquantity'] = 'New Quantity';
+$lang['uquantity'] = 'Update Quantity';
+
+$lang['avls'] = 'Available Stock';
+$lang['qnt'] = 'Quantity';
+$lang['lu'] = 'Last Updated';
+
 
 ?>

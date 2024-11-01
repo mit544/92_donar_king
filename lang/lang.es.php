@@ -67,7 +67,33 @@ $lang['logout'] = 'Cerrar sesión';
 
 // staff dashboard
 $lang['welcome_staff'] = 'Bienvenido';
+$lang['need_help'] = '¿Necesitas ayuda?';
+$lang['need_help_title'] = 'Pasos para que el personal actualice el stock';
 
+$lang['need_help_step1_title'] = 'Iniciar sesión en el panel de control:';
+$lang['need_help_step1_desc'] = 'Acceda al panel de control del personal utilizando sus credenciales.';
 
+$lang['need_help_step2_title'] = 'Navegar a la sección de inventario:';
+$lang['need_help_step2_desc'] = 'Localice y haga clic en la pestaña "Inventario" o "Gestión de Stock" en el menú de navegación.';
 
+$lang['need_help_step3_title'] = 'Ver niveles actuales de stock:';
+$lang['need_help_step3_desc'] = 'Revise los niveles actuales de stock mostrados en formato de tabla. Esto debe incluir nombres de artículos, cantidades y cualquier alerta de stock bajo.';
+
+$lang['need_help_step4_title'] = 'Seleccionar un artículo para actualizar:';
+$lang['need_help_step4_desc'] = 'Identifique el artículo que desea actualizar. Puede usar opciones de búsqueda o filtro para encontrar productos específicos rápidamente.';
+
+$lang['need_help_step5_title'] = 'Editar cantidad de stock:';
+$lang['need_help_step5_desc'] = '- Haga clic en el botón "Editar" junto al artículo que desea actualizar.<br>- En el formulario de edición, cambie la cantidad de stock según sea necesario (por ejemplo, aumente o disminuya según nuevas entregas o ventas).';
+
+$lang['need_help_step6_title'] = 'Guardar cambios:';
+$lang['need_help_step6_desc'] = '- Después de actualizar la cantidad, haga clic en el botón "Guardar" o "Actualizar" para aplicar los cambios.<br>- Confirme que aparece un mensaje de éxito, indicando que el stock se ha actualizado correctamente.';
+
+$lang['need_help_step7_title'] = 'Cerrar sesión:';
+$lang['need_help_step7_desc'] = 'Una vez completadas todas las actualizaciones, asegúrese de cerrar sesión en el sistema por motivos de seguridad.';
+
+$lang['nquantity'] = 'Nueva Cantidad';
+$lang['uquantity'] = 'Actualizar Cantidad';
+$lang['avls'] = 'Stock Disponible';
+$lang['qnt'] = 'Cantidad';
+$lang['lu'] = 'Última Actualización';
 ?>

@@ -66,5 +66,34 @@ $lang['logout'] = 'Se déconnecter';
 
 // staff dashboard
 $lang['welcome_staff'] = 'Bienvenue';
+$lang['need_help'] = 'Besoin d\'aide ?';
 
+$lang['need_help_title'] = 'Étapes pour le personnel pour mettre à jour le stock';
+
+$lang['need_help_step1_title'] = 'Se connecter au tableau de bord :';
+$lang['need_help_step1_desc'] = 'Accédez au tableau de bord du personnel en utilisant vos identifiants.';
+
+$lang['need_help_step2_title'] = 'Naviguer vers la section Inventaire :';
+$lang['need_help_step2_desc'] = 'Localisez et cliquez sur l\'onglet "Inventaire" ou "Gestion des stocks" dans le menu de navigation.';
+
+$lang['need_help_step3_title'] = 'Consulter les niveaux de stock actuels :';
+$lang['need_help_step3_desc'] = 'Examinez les niveaux de stock actuels affichés sous forme de tableau. Cela devrait inclure les noms des articles, les quantités et toutes les alertes pour les stocks bas.';
+
+$lang['need_help_step4_title'] = 'Sélectionner un article à mettre à jour :';
+$lang['need_help_step4_desc'] = 'Identifiez l\'article que vous souhaitez mettre à jour. Vous pouvez utiliser les options de recherche ou de filtrage pour trouver rapidement des produits spécifiques.';
+
+$lang['need_help_step5_title'] = 'Modifier la quantité de stock :';
+$lang['need_help_step5_desc'] = '- Cliquez sur le bouton "Modifier" à côté de l\'article que vous souhaitez mettre à jour.<br>- Dans le formulaire de modification, changez la quantité de stock selon les besoins (par exemple, augmentez ou diminuez en fonction des nouvelles livraisons ou des ventes).';
+
+$lang['need_help_step6_title'] = 'Enregistrer les modifications :';
+$lang['need_help_step6_desc'] = '- Après avoir mis à jour la quantité, cliquez sur le bouton "Enregistrer" ou "Mettre à jour" pour appliquer les modifications.<br>- Confirmez qu\'un message de succès apparaît, indiquant que le stock a été mis à jour avec succès.';
+
+$lang['need_help_step7_title'] = 'Se déconnecter :';
+$lang['need_help_step7_desc'] = 'Une fois toutes les mises à jour terminées, assurez-vous de vous déconnecter du système pour des raisons de sécurité.';
+
+$lang['nquantity'] = 'Nouvelle Quantité';
+$lang['uquantity'] = 'Mettre à Jour la Quantité';
+$lang['avls'] = 'Stock Disponible';
+$lang['qnt'] = 'Quantité';
+$lang['lu'] = 'Dernière Mise à Jour';
 ?>
